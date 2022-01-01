@@ -8,6 +8,15 @@ public class Character {
 	String name;
 	String imageUrl;
 
+	// constructor
+
+	public Character(int hp, float initiative, String name) {
+		this.hp = hp;
+		this.initiative = initiative;
+		this.name = name;
+	}
+
+
 	// getters and setters
 
 	int getSpellSlot(){
