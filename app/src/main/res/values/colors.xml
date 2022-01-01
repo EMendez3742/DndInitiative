@@ -6,5 +6,15 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="red_200">#ff6666</color>
+    <color name="red_700">#800000</color>
+    <color name="dark_blue">#3333cc</color>
+    <color name="gray">#C4C4C4</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tan_200">#fff0e6</color>
+    <color name="tan">#9A6E46</color>
+
+    <style name="Button.Tan" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/tan</item>
+    </style>
 </resources>
