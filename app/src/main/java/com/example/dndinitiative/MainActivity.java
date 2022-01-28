@@ -23,6 +23,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/* Main Activity of the app that contains a recyclerview to see all of the characters
+* */
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, AdditionDialogFragment.DialogListener{
 
     private RecyclerView recyclerView;
@@ -46,18 +48,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // The current combat round
         roundCount = 1;
 
+        // Finding the Id of the views
         backButton = findViewById(R.id.button);
         nextButton = findViewById(R.id.button2);
         addButton = findViewById(R.id.buttonAddMain);
         roundText = findViewById(R.id.roundView);
 
 
-        // data to populate recyclerView
+        // Data to populate recyclerView
         characters = new ArrayList<>();
 
-        //read Data from file
+        // Read Data from file
         loadAdapter(R.raw.characters, characters);
 
         // set up RecyclerView
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 int topOfList = layoutManager.findFirstVisibleItemPosition();
 
                 int position = topOfList%characters.size();
+                // When we reach the top of the initiative order
                 if(position == (0)){
                     if(roundCount > 1) roundCount--;
                     roundText.setText(""+roundCount);
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 int topOfList = layoutManager.findFirstVisibleItemPosition();
 
                 int position = topOfList%characters.size();
+                // When we reach the top of the initiative order
                 if(position == (characters.size()-1)){
                     roundCount++;
                     roundText.setText(""+roundCount);
@@ -121,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             }
         };
 
-        //Back and next button onclick
+        //Back and next button onclick set
         backButton.setOnClickListener(previousPlayerListener);
         nextButton.setOnClickListener(nextPlayerListener);
 
@@ -144,24 +150,28 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         dialog.show(getSupportFragmentManager(),"example");
     }
 
+    // adding character to "characters" list
     @Override
     public void applyText(Character character) {
         //Context c = getApplicationContext();
         //Toast t = new Toast(c);
 
-        /*String text = "Character is: \n"
+        /* String text = "Character is: \n"
                 + character.name + "\n"
                 + character.currentHp + "\n"
                 + character.maxHp + "\n"
-                + character.initiative;*/
+                + character.initiative; */
         //addCharacterButton.setText(text);
 
+        // Add character to characters list
         characters.add(character);
         adapter.notifyDataSetChanged();
         //Toast.makeText(c, text, Toast.LENGTH_SHORT).show();
 
     }
 
+
+    // Read from file and load adapter
     public void loadAdapter(int rawFile, ArrayList<Character> characters){
         String data = "";
         String temp[] = new String[3];
@@ -189,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         }
     }
 
+    // Updating Adapter
     public void updateAdapter(RecyclerViewAdapter adapter){
         adapter.notifyDataSetChanged();
     }

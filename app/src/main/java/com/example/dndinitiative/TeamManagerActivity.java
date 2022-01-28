@@ -18,6 +18,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/*This activity allows the user to manage the team
+* */
 public class TeamManagerActivity extends AppCompatActivity implements AdditionDialogFragment.DialogListener {
     private Button addCharacterButton;
     private RecyclerViewAdapter adapter;

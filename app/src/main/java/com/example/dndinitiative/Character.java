@@ -1,7 +1,7 @@
 package com.example.dndinitiative;
 
 /* This is the Character class, which includes information on Hp, spell slots,
-initiative and other characer related information.
+initiative and other character related information.
 */
 public class Character {
     int spellSlot;
@@ -36,67 +36,72 @@ public class Character {
         this.ac = ac;
     }
 
-    // getters and setters
+    // Getter for character name
     String getName(){
         return name;
     }
 
+    // Setter for character name
     void setName(String n){
         name = n;
     }
 
-    /*int getSpellSlot(){
-        return spellSlot;
-    }
-
-    void setSpellSlot(int slots){
-        spellSlot = slots;
-    }*/
-
+    // Getter for character current hp
     int getCurrentHp(){
         return currentHp;
     }
 
+    // Setter for character current hp
     void setCurentHp(int points){
         currentHp = points;
     }
 
+    // Getter for character max hp
     int getMaxHp(){
         return maxHp;
     }
 
+    // Setter for character max hp
     void setMaxHp(int points){
         maxHp = points;
     }
 
+    // Getter for character initiative
     int getInitiative(){
         return initiative;
     }
 
+    // Setter for character initiative
     void setInitiative(int init){
         initiative = init;
     }
 
+    // Getter for character AC
     public int getAc() {
         return ac;
     }
 
+    // Setter for character AC
     public void setAc(int ac) {
         this.ac = ac;
     }
 
+    // Getter for character image URL
     String getImageUrl(){
         return imageUrl;
     }
 
+    // Setter for character image URl
     void setImageUrl(String url){
         imageUrl = url;
     }
 
-    // hp damage methods
+    // When a character takes damage
     void takeHp(int points){
         currentHp -= points;
     }
+
+    // When a character heals
     void addHp(int points){
         currentHp += points;
     }

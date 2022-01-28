@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,6 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView healthView;
         TextView initView;
         ProgressBar hpProgress;
+        Button deleteButton;
 
         // ViewHolder Constructor
         ViewHolder(View itemView){
@@ -77,7 +80,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             healthView = itemView.findViewById(R.id.textHp);
             initView = itemView.findViewById(R.id.textInitiative);
             hpProgress = itemView.findViewById(R.id.hpProgressBar);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
             itemView.setOnClickListener(this);
+            deleteButton.setOnClickListener(deleteButtonListener);
         }
 
         // onClick
@@ -85,6 +90,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View view){
             if(clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
         }
+
+        void deleteCharacter(){
+            //getAdapterPosition()
+        }
+
+        View.OnClickListener deleteButtonListener = new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Toast.makeText(view.getContext(), "deleted", Toast.LENGTH_SHORT).show();
+
+                int position = getAdapterPosition();
+
+                list.remove(position);
+                notifyDataSetChanged();
+
+                //Toast.makeText(view.getContext(), n, Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     // Method for getting data at click

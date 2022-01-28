@@ -21,7 +21,9 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+// Fragment for the dialog box that appears when a new character is being added to the order
 public class AdditionDialogFragment extends AppCompatDialogFragment {
+    // EditTexts for the character's name, current hp, max hp, initiative, and ac
     private EditText nameText, hpCurrentText, hpMaxText, initiativeText, acText;
     private String name;
     private int hpCurrent = 0, hpMax = 0, ac = 0, initiative = 0;
@@ -64,35 +66,40 @@ public class AdditionDialogFragment extends AppCompatDialogFragment {
         saveButton.setOnClickListener(saveButtonListener);
     } */
 
+    // Dialog for saving a new character
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // AlertDialog Builder created
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        LayoutInflater inflator = getActivity().getLayoutInflater();
-        View view = inflator.inflate(R.layout.activity_addition, null);
+        // Inflater for the Layout and View to be inflated created
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.activity_addition, null);
 
+        // The builder's view is set using the previous view
         builder.setView(view)
                 .setTitle("Add Character")
                 // This button will cancel the addition
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 })
                 // This button will send over the character data
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        // Character information is parsed
                         name = nameText.getText().toString();
                         hpCurrent = Integer.parseInt(hpCurrentText.getText().toString());
                         hpMax = Integer.parseInt(hpMaxText.getText().toString());
                         initiative = Integer.parseInt(initiativeText.getText().toString());
                         //ac = Integer.parseInt(acText.getText().toString());
 
+                        // New character is created with the parsed information
                         newChar = new Character(name, hpCurrent, hpMax, initiative, ac);
 
-                        //Send to Activity
+                        // New character is sent to the Activity
                         listener.applyText(newChar);
                     }
                 });

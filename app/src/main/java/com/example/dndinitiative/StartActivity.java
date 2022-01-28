@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/* This activity is the one that starts off the app and allows the user to open up the main activity and the manage team activity.
+* */
 public class StartActivity extends AppCompatActivity{
 
     private Button startButton;
