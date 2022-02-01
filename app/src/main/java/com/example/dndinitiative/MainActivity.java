@@ -1,26 +1,16 @@
 package com.example.dndinitiative;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /* Main Activity of the app that contains a recyclerview to see all of the characters
@@ -62,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         characters = new ArrayList<>();
 
         // Read Data from file
-        loadAdapter(R.raw.characters, characters);
+        FileIOMethods.readFromFile("characterList.txt", characters, getApplicationContext());
 
         // set up RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
@@ -81,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         View.OnClickListener previousPlayerListener = new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Context c = getApplicationContext();
-                //Toast t = new Toast(c);
-                //Toast.makeText(c, "Back Clicked", Toast.LENGTH_SHORT).show();
                 int topOfList = layoutManager.findFirstVisibleItemPosition();
 
                 int position = topOfList%characters.size();
@@ -102,15 +89,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         View.OnClickListener nextPlayerListener = new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Context c = getApplicationContext();
-                //Toast t = new Toast(c);
-                //Toast.makeText(c, "Next Clicked", Toast.LENGTH_SHORT).show();
-
-                // Old implementation, remove first, add last
-                /* Character tempCharacter = characters.get(0);
-                characters.remove(0);
-                characters.add(tempCharacter);
-                updateAdapter(adapter);*/
 
                 int currentSpot = layoutManager.findLastCompletelyVisibleItemPosition();
                 int topOfList = layoutManager.findFirstVisibleItemPosition();
@@ -153,55 +131,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     // adding character to "characters" list
     @Override
     public void applyText(Character character) {
-        //Context c = getApplicationContext();
-        //Toast t = new Toast(c);
-
-        /* String text = "Character is: \n"
-                + character.name + "\n"
-                + character.currentHp + "\n"
-                + character.maxHp + "\n"
-                + character.initiative; */
-        //addCharacterButton.setText(text);
 
         // Add character to characters list
         characters.add(character);
         adapter.notifyDataSetChanged();
-        //Toast.makeText(c, text, Toast.LENGTH_SHORT).show();
+        FileIOMethods.writeToFile("characterList.txt", characters, getApplicationContext());
 
-    }
-
-
-    // Read from file and load adapter
-    public void loadAdapter(int rawFile, ArrayList<Character> characters){
-        String data = "";
-        String temp[] = new String[3];
-
-        StringBuffer sbuffer = new StringBuffer();
-
-        InputStream is = this.getResources().openRawResource(rawFile);
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-        if(is != null){
-            try{
-                while((data = reader.readLine()) != null){
-                    // Split up string into pieces of information
-                    temp = data.split("-+");
-                    //sbuffer.append(data + "\n");
-                    characters.add(new Character(temp[0], Integer.valueOf(temp[1]), Integer.valueOf(temp[2])));
-                }
-                //list.add(String.valueOf(sbuffer));
-                is.close();
-            }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // Updating Adapter
-    public void updateAdapter(RecyclerViewAdapter adapter){
-        adapter.notifyDataSetChanged();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.example.dndinitiative;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,19 +41,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         int listNum = list.size();
 
-        Character character = list.get(position%listNum);
-        holder.textView.setText(character.getName());
+        if(listNum != 0) {
+            Character character = list.get(position % listNum);
+            holder.textView.setText(character.getName());
 
-        int currentHp = character.getCurrentHp();
-        int maxHp = character.getMaxHp();
-        holder.healthView.setText(currentHp+"/"+maxHp);
+            int currentHp = character.getCurrentHp();
+            int maxHp = character.getMaxHp();
+            holder.healthView.setText(currentHp + "/" + maxHp);
 
-        int init = character.getInitiative();
-        String initString = String.valueOf(init);
-        holder.initView.setText(initString);
+            int init = character.getInitiative();
+            String initString = String.valueOf(init);
+            holder.initView.setText(initString);
 
-        int healthPercent = (currentHp/maxHp)*100;
-        holder.hpProgress.setProgress(healthPercent);
+            int healthPercent = (currentHp / maxHp) * 100;
+            holder.hpProgress.setProgress(healthPercent);
+        }
+        else{
+            listNum = 1;
+        }
     }
 
     // total number of rows
@@ -91,10 +95,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             if(clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
         }
 
-        void deleteCharacter(){
-            //getAdapterPosition()
-        }
-
         View.OnClickListener deleteButtonListener = new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -104,8 +104,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 list.remove(position);
                 notifyDataSetChanged();
-
-                //Toast.makeText(view.getContext(), n, Toast.LENGTH_SHORT).show();
+                FileIOMethods.writeToFile("characterList.txt", list, view.getContext());
             }
         };
     }
