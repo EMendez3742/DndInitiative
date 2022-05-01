@@ -16,7 +16,7 @@
 An app designed to play through D&amp;D initiative order of multiple characters
 ### Goals
 #### Functional Requirements:
-* Sort intitiave order
+* Sort initiative order
 * Heal and take hp
 * Use and Regain Spell Slots
 * Show hp
@@ -25,6 +25,7 @@ An app designed to play through D&amp;D initiative order of multiple characters
 * Written in Java or swift
 * Android/Apple?
 * Use MySQL for database access
+* Use Rest for monster information
 #### Potential Extras:
 
 ## Setup/Installation <a name="setup">

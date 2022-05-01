@@ -35,7 +35,6 @@ public class StartActivity extends AppCompatActivity{
         };
 
         // Manage Team onClick
-
         Intent manageIntent = new Intent(this, TeamManagerActivity.class);
         manageTeamListener = new View.OnClickListener(){
             @Override
