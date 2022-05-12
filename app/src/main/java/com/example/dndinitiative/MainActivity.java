@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private ArrayList<Character> characters;
     private Button backButton;
     private Button nextButton;
-    private Button addButton;
+    //private Button addButton;
     private TextView roundText;
-    private Button addHealth;
-    private Button takeHealth;
+    //private Button addHealth;
+    //private Button takeHealth;
     int roundCount;
 
     ArrayList<Character> getCharacters(){
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         roundCount = 1;
 
         // Finding the Id of the views
-        backButton = findViewById(R.id.button);
-        nextButton = findViewById(R.id.button2);
-        addButton = findViewById(R.id.buttonAddMain);
-        roundText = findViewById(R.id.roundView);
+        backButton = findViewById(R.id.buttonBack);
+        nextButton = findViewById(R.id.buttonNext);
+        //addButton = findViewById(R.id.buttonAddMain);
+        roundText = findViewById(R.id.textRoundNum);
 
 
         // Data to populate recyclerView
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             }
         };
 
-        addButton.setOnClickListener(addCharacterListener);
+        //addButton.setOnClickListener(addCharacterListener);
     }
 
 

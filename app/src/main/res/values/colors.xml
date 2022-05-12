@@ -9,7 +9,7 @@
     <color name="red_200">#ff6666</color>
     <color name="red_700">#800000</color>
     <color name="dark_blue">#3333cc</color>
-    <color name="gray">#C4C4C4</color>
+    <!--color name="gray">#C4C4C4</color-->
     <color name="white">#FFFFFFFF</color>
     <color name="tan_200">#fff0e6</color>
     <color name="tan">#9A6E46</color>
@@ -17,4 +17,21 @@
     <style name="Button.Tan" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@color/tan</item>
     </style>
+    <style name="buttonBrownDark">
+        <item name="background">@color/brown_chocolate</item>
+        <item name="color">@color/brown_dark</item>
+        <item name="textFillColor">@color/white_medium</item>
+    </style>
+    <style name="buttonBrownChocolate">
+        <item name="background">@color/brown_chocolate</item>
+        <item name="color">@color/brown_chocolate</item>
+    </style>
+
+    <!-- Tan UI Redesign Colors  -->
+    <color name="white_medium">#F9F4ED</color>
+    <color name="brown_chocolate">#A46A25</color>
+    <color name="brown_dark">#4F3312</color>
+    <color name="red_brown">#B44100</color>
+    <color name="gray">#A5A5A5</color>
+
 </resources>

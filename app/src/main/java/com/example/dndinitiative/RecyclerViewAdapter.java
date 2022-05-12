@@ -82,11 +82,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             textView = itemView.findViewById(R.id.row_name);
             healthView = itemView.findViewById(R.id.textHp);
-            initView = itemView.findViewById(R.id.textInitiative);
+            //initView = itemView.findViewById(R.id.textInitiative);
             hpProgress = itemView.findViewById(R.id.hpProgressBar);
-            deleteButton = itemView.findViewById(R.id.deleteButton);
+            //deleteButton = itemView.findViewById(R.id.deleteButton);
             itemView.setOnClickListener(this);
-            deleteButton.setOnClickListener(deleteButtonListener);
+            //deleteButton.setOnClickListener(deleteButtonListener);
         }
 
         // onClick

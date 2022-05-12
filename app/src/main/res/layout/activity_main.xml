@@ -4,104 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_medium"
     tools:context=".MainActivity">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imageCard"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerManageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/wave_screenshot" />
-
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:layout_marginBottom="77dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/textView6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerManageView"
-        android:background="@drawable/custom_rounded_corners"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:layout_marginBottom="77dp"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerManageView"
-        android:background="@drawable/custom_rounded_corners"
-        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recyclerManageView"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@id/textView6"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/frameRound"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageCard"
-        app:layout_constraintVertical_bias="0.7">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.7">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Round:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/roundView"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@id/recyclerManageView"/>
-
-    <TextView
-        android:id="@+id/roundView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="1"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/frameRound"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/brown_dark"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView6"/>
+        app:layout_constraintTop_toBottomOf="@id/recyclerManageView">
 
-    <Button
-        android:id="@+id/buttonAddMain"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="200dp"
-        android:text="+"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerManageView"
+        <TextView
+            android:id="@+id/textRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Round:"
+            android:textColor="@color/white_medium"
+            android:textStyle="bold"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/textRoundNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white_medium"
+            android:text="1"
+            android:textSize="16pt" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/buttonHome"
+        android:src="@drawable/home"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_corners_brown_chocolate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonNext"
+        app:layout_constraintStart_toEndOf="@id/buttonBack"
+        app:layout_constraintTop_toBottomOf="@id/frameRound" />
+
+    <ImageButton
+        android:id="@+id/buttonBack"
+        android:src="@drawable/chevron_left"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_corners_brown_chocolate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonHome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameRound" />
+
+    <ImageButton
+        android:id="@+id/buttonNext"
+        android:src="@drawable/chevron_right"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_corners_brown_chocolate"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageCard"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/buttonHome"
+        app:layout_constraintTop_toBottomOf="@+id/frameRound"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
