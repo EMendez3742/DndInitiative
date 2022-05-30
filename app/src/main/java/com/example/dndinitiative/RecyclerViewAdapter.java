@@ -9,8 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /*
@@ -20,7 +25,7 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private List<Character> list;
     private LayoutInflater inflator;
-    private ItemClickListener clickListener;
+    private CharacterClickListener characterClickListener;
 
     // Pass character list data into constructor
     RecyclerViewAdapter(Context context, List<Character> charList){
@@ -28,11 +33,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.list = charList;
     }
 
+    // Pass character list data into constructor
+    RecyclerViewAdapter(Context context, List<Character> charList, CharacterClickListener characterClickListener){
+        this.inflator = LayoutInflater.from(context);
+        this.list = charList;
+        this.characterClickListener = characterClickListener;
+    }
+
     // ViewHolder is created and inflates the row layout from xml
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View view = inflator.inflate(R.layout.recyclerview_row, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, characterClickListener);
     }
 
     // ViewHolder bind data to the TextView in each row
@@ -42,19 +54,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int listNum = list.size();
 
         if(listNum != 0) {
+            Collections.sort(list, new Comparator<Character>() {
+                @Override
+                public int compare(Character c1, Character c2) {
+                    int c1Sum, c2Sum;
+                    c1Sum = c1.getInitiative() + c1.getInitiativeBonus();
+                    c2Sum = c2.getInitiative() + c2.getInitiativeBonus();
+
+                    if(c1Sum == c2Sum) return 0;
+                    else if(c1Sum > c2Sum) return 1;
+                    else return -1;
+                }
+            });
+
             Character character = list.get(position % listNum);
-            holder.textView.setText(character.getName());
+            holder.nameView.setText(character.getName());
 
             int currentHp = character.getCurrentHp();
             int maxHp = character.getMaxHp();
             holder.healthView.setText(currentHp + "/" + maxHp);
 
             int init = character.getInitiative();
-            String initString = String.valueOf(init);
-            holder.initView.setText(initString);
 
-            int healthPercent = (currentHp / maxHp) * 100;
+            double health = ((double)currentHp) / maxHp;
+            int healthPercent = (int) (health * 100);
+            System.out.println(character.toString());
             holder.hpProgress.setProgress(healthPercent);
+
+            holder.acView.setText(""+character.getAc());
         }
         else{
             listNum = 1;
@@ -71,28 +98,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /*ViewHolder class that extends RecyclerView.ViewHolder
      Stores and recycles views as scrolls off screen */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView textView;
+        CardView characterCardView;
+        TextView nameView;
         TextView healthView;
-        TextView initView;
         ProgressBar hpProgress;
-        Button deleteButton;
+        TextView acView;
+        CharacterClickListener characterClickListener;
 
         // ViewHolder Constructor
-        ViewHolder(View itemView){
+        ViewHolder(@NonNull View itemView, CharacterClickListener characterClickListener){
             super(itemView);
-            textView = itemView.findViewById(R.id.row_name);
+            nameView = itemView.findViewById(R.id.row_name);
             healthView = itemView.findViewById(R.id.textHp);
-            //initView = itemView.findViewById(R.id.textInitiative);
             hpProgress = itemView.findViewById(R.id.hpProgressBar);
-            //deleteButton = itemView.findViewById(R.id.deleteButton);
+            acView = itemView.findViewById(R.id.acTextView);
+            characterCardView = itemView.findViewById(R.id.characterBlock);
+
+            this.characterClickListener = characterClickListener;
+
             itemView.setOnClickListener(this);
-            //deleteButton.setOnClickListener(deleteButtonListener);
         }
 
         // onClick
         @Override
         public void onClick(View view){
-            if(clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
+            if(characterClickListener != null) characterClickListener.onCharacterClick(getAdapterPosition());
         }
 
         View.OnClickListener deleteButtonListener = new View.OnClickListener(){
@@ -115,12 +145,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // Allows click events to be caught
-    void setClickListener(ItemClickListener itemClickListener){
-        this.clickListener = itemClickListener;
+    void setClickListener(CharacterClickListener listener){
+        this.characterClickListener = listener;
     }
 
     // Parent activity will implement this method to respond to click events
-    public interface ItemClickListener{
-        void onItemClick(View view, int position);
+    public interface CharacterClickListener{
+        void onCharacterClick(int position);
     }
 }

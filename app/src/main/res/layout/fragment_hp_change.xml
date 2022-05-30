@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/nameLayout_hp_change"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/hpLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/nameText_hp_change"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/italianno_regular"
+                android:paddingTop="5dp"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                tools:layout_editor_absoluteX="150dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hpLayout"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/hpEditText_hp_change"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameLayout_hp_change">
+
+
+            <ProgressBar
+                android:id="@+id/hpProgressBar_hp_change"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:progressDrawable="@drawable/custom_progressbar"
+                tools:layout_editor_absoluteX="187dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <TextView
+                android:id="@+id/textHp_hp_change"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="HP"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/hpEditText_hp_change"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:hint="Hp change"
+            android:inputType="number"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/plusButton"
+            app:layout_constraintStart_toEndOf="@+id/minusButton"
+            app:layout_constraintTop_toBottomOf="@+id/hpLayout"></EditText>
+
+        <Button
+            android:id="@+id/plusButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hpEditText_hp_change"
+            app:layout_constraintTop_toBottomOf="@+id/hpLayout" />
+
+        <Button
+            android:id="@+id/minusButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/hpEditText_hp_change"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hpLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

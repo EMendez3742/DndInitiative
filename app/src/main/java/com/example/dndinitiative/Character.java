@@ -5,9 +5,8 @@ initiative and other character related information.
 */
 public class Character {
     int spellSlot;
-    int currentHp, maxHp, initiative, ac;
+    int currentHp, maxHp, initiative, initiativeBonus, ac;
     String name;
-    String imageUrl;
 
     // Empty Constructor
     public Character() {
@@ -15,6 +14,7 @@ public class Character {
         this.currentHp = 1;
         this.maxHp = 1;
         this.initiative = 1;
+        this.initiativeBonus = 1;
         this.ac = 1;
     }
 
@@ -24,15 +24,17 @@ public class Character {
         this.currentHp = hp;
         this.maxHp = hp;
         this.initiative = initiative;
+        this.initiativeBonus = 0;
         this.ac = 1;
     }
 
     // Full Constructor
-    public Character(String name, int currentHp, int maxHp, int initiative, int ac) {
+    public Character(String name, int currentHp, int maxHp, int initiative, int initiativeBonus, int ac) {
         this.name = name;
         this.currentHp = currentHp;
         this.maxHp = maxHp;
         this.initiative = initiative;
+        this.initiativeBonus = initiativeBonus;
         this.ac = ac;
     }
 
@@ -76,6 +78,16 @@ public class Character {
         initiative = init;
     }
 
+    // Getter for character initiative bonus
+    int getInitiativeBonus(){
+        return initiativeBonus;
+    }
+
+    // Setter for character initiative bonus
+    void setInitiativeBonus(int initBonus){
+        initiativeBonus = initBonus;
+    }
+
     // Getter for character AC
     public int getAc() {
         return ac;
@@ -84,16 +96,6 @@ public class Character {
     // Setter for character AC
     public void setAc(int ac) {
         this.ac = ac;
-    }
-
-    // Getter for character image URL
-    String getImageUrl(){
-        return imageUrl;
-    }
-
-    // Setter for character image URl
-    void setImageUrl(String url){
-        imageUrl = url;
     }
 
     // When a character takes damage
@@ -113,4 +115,16 @@ public class Character {
     void addSpellSlot(int slots){
         spellSlot += slots;
     }*/
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "name='" + name +
+                ", currentHp=" + currentHp +
+                ", maxHp=" + maxHp +
+                ", initiative=" + initiative +
+                ", initiativeBonus="+ initiativeBonus +
+                ", ac=" + ac + '\'' +
+                '}';
+    }
 }
