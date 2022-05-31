@@ -37,7 +37,8 @@
                     android:id="@+id/charImage"
                     android:background="@color/white_medium"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/wave_screenshot" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout

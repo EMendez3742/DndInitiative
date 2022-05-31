@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 /*
 * This is a class for the RecyclerView Adapter to display the characters on the screen
@@ -62,7 +64,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     c2Sum = c2.getInitiative() + c2.getInitiativeBonus();
 
                     if(c1Sum == c2Sum) return 0;
-                    else if(c1Sum > c2Sum) return 1;
+                    else if(c1Sum < c2Sum) return 1;
                     else return -1;
                 }
             });
@@ -82,6 +84,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.hpProgress.setProgress(healthPercent);
 
             holder.acView.setText(""+character.getAc());
+
+            //get image for character
+            switch(position % 3){
+                case 0:
+                    holder.characterImageView.setImageResource(R.drawable.chess_knight);
+                    break;
+                case 1:
+                    holder.characterImageView.setImageResource(R.drawable.spartan_helmet);
+                    break;
+                case 2:
+                    holder.characterImageView.setImageResource(R.drawable.swords);
+                    break;
+            }
         }
         else{
             listNum = 1;
@@ -103,6 +118,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView healthView;
         ProgressBar hpProgress;
         TextView acView;
+        ImageView characterImageView;
         CharacterClickListener characterClickListener;
 
         // ViewHolder Constructor
@@ -113,6 +129,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             hpProgress = itemView.findViewById(R.id.hpProgressBar);
             acView = itemView.findViewById(R.id.acTextView);
             characterCardView = itemView.findViewById(R.id.characterBlock);
+            characterImageView = itemView.findViewById(R.id.charImage);
 
             this.characterClickListener = characterClickListener;
 

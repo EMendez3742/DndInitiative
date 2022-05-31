@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -59,9 +60,12 @@ public class HpChangeDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onClick(View view){
                 int change = Integer.parseInt(hpChange.getText().toString());
-                if(currentHp - change >= 0) currentHp -= change;
-                ((MainActivity)getActivity()).updateHp(position, currentHp);
-                dismiss();
+                if(currentHp - change >= 0){
+                    currentHp -= change;
+                    ((MainActivity)getActivity()).updateHp(position, currentHp);
+                    dismiss();
+                }
+                else Toast.makeText(getContext(),"Health cannot be less than 0",Toast.LENGTH_SHORT).show();
             }
         };
         minusButton.setOnClickListener(minusListener);
@@ -72,9 +76,12 @@ public class HpChangeDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onClick(View view){
                 int change = Integer.parseInt(hpChange.getText().toString());
-                if(currentHp + change <= 250) currentHp += change;
-                ((MainActivity)getActivity()).updateHp(position, currentHp);
-                dismiss();
+                if(currentHp + change <= 250){
+                    currentHp += change;
+                    ((MainActivity)getActivity()).updateHp(position, currentHp);
+                    dismiss();
+                }
+                else Toast.makeText(getContext(),"Health cannot be this high",Toast.LENGTH_SHORT).show();
             }
         };
         plusButton.setOnClickListener(plusListener);

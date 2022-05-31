@@ -20,6 +20,7 @@ import java.util.ArrayList;
 /*This activity allows the user to manage the team
 * */
 public class TeamManagerActivity extends AppCompatActivity implements AdditionDialogFragment.DialogListener {
+    private final String CHARACTER_FILE = "characterList.txt";
     private Button addCharacterButton;
     private ImageButton homeButton;
     private RecyclerViewAdapter adapter;
@@ -87,12 +88,16 @@ public class TeamManagerActivity extends AppCompatActivity implements AdditionDi
 
                 adapter.notifyItemRemoved(position);
 
+
+                FileIOMethods.writeToFile(CHARACTER_FILE, characters, getApplicationContext());
+
                 // Snackbar to ask if user wants to undo
                 Snackbar.make(recyclerView, deletedCharacter.getName(), Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
                         characters.add(position, deletedCharacter);
                         adapter.notifyItemInserted(position);
+                        FileIOMethods.writeToFile(CHARACTER_FILE, characters, getApplicationContext());
                     }
                 }).show();
             }
@@ -110,6 +115,6 @@ public class TeamManagerActivity extends AppCompatActivity implements AdditionDi
         // Add character to characters list
         characters.add(character);
         adapter.notifyDataSetChanged();
-        FileIOMethods.writeToFile("characterList.txt", characters, getApplicationContext());
+        FileIOMethods.writeToFile(CHARACTER_FILE, characters, getApplicationContext());
     }
 }

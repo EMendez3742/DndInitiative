@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                     Log.d("Round","First Visible is: "+roundCount);
                 }
 
-                layoutManager.scrollToPosition(topOfList-1);
+                layoutManager.scrollToPositionWithOffset((topOfList-1)%characters.size(),0);
             }
         };
 
@@ -127,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 //layoutManager.scrollToPosition(recyclerView, null, currentSpot+1);
                 //smoothScroller.setTargetPosition(currentSpot+1);
                 //layoutManager.startSmoothScroll(smoothScroller);
-                layoutManager.scrollToPosition(currentSpot+1);
+                //layoutManager.scrollToPosition(currentSpot+1);
+                layoutManager.scrollToPositionWithOffset(position+1, 0);
                 //recyclerView.smoothScrollToPosition(currentSpot+1);
             }
         };
